@@ -35,16 +35,12 @@ const zelurlwfm = "https://zpool.wfmpools.com/api/stats";
 const zelurlpickaxe = "https://equi.pickaxe.pro/api/stats";
 const zelurlforgetop = "https://zcl.forgetop.com/api/stats_all";
 
-// POOL BLOCK STATS API URLS
 
-const zelblockurl = "http://zel.cloudpools.net/api/blocks";
-  
-// CHANNEL IDs
+// CHANNEL IDs - CLOUDPOOLS SPECIFIC
 const botlyfechan = '409793546577772575';
 const zelchan = '409206258764349446';
-  
-// OPTIONS
 
+// GET POOL HASHRATES
 function getPoolHash(){
 	request.get(zelurlCloudPoolsV2, (error, response, body) => {
 		let json = JSON.parse(body);
@@ -105,7 +101,6 @@ function getPoolHash(){
 }
 
 bot.on('message', function (user, userID, channelID, message, evt) {
-    
     if (message.substring(0, 1) == '!') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
@@ -121,7 +116,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 					' __Please spread the hash. *No pool should have over 50% of total network hash.*__\r\n\r\n:pick: Pools:\r\n<http://mine.CloudPools.net> ` (US) ` ` ' + zelhashCloudPoolsV2 +  ' `\r\n<http://zel.CoinBlockers.com> ` (EU/US) ` ` '  + zelhashCoinBlockers + ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool + ' `\r\n<http://www.flowmining.org/> ` (EU) ` ` ' + zelhashFlowPool + ' `\r\n<https://zel.forgetop.com/> ` (EU/ASIA) ` ` ' + zelhashforgetop + ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool + ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe + ' `\r\n<https://zpool.wfmpools.com/> ` ' + zelhashwfm + ' `\r\n<http://pool.xbtmoon.com/> ` (EU) ` ` ' + zelhashXBTPool + ' `\n\r\n*Data estimated and relative due to latency, etc.*'
 					 }); 
 			},2000);
-            break;//' `\r\n<http://madmaxpool.hopto.org/> ` (US/CA) ` ` ' + zelhashMadMaxPool +
+            break;
+			//' `\r\n<http://madmaxpool.hopto.org/> ` (US/CA) ` ` ' + zelhashMadMaxPool +
          }
      }
 });
