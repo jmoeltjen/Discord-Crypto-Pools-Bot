@@ -1,0 +1,7 @@
+
+err.log
+auth.json
+*.log
+/node_modules
+package-lock.json
+start.bat
