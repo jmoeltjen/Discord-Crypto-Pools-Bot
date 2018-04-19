@@ -260,7 +260,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     ' `\r\n<http://zel.CoinBlockers.com> ` (EU/US) ` ` ' + zelhashCoinBlockers +
                     ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool +
                     ' `\r\n<http://www.flowmining.org/> ` (EU) ` ` ' + zelhashFlowPool +
-                    ' `\r\n<https://zel.forgetop.com/> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+                    ' `\r\n<https://zel.ForgeTop.com/> ` (EU/ASIA) ` ` ' + zelhashforgetop +
                     ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool +
                     ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
                     ' `\r\n<https://zpool.wfmpools.com/> ` ' + zelhashwfm +
