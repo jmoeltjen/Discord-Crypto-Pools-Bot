@@ -5,7 +5,7 @@ var request = require('request');
 var localStorage = require('localStorage')
 var schedule = require('node-schedule');
 const zeroHash = '0.00 KSol/s';
-const refreshIntervalTime = 10 * 1000;
+const refreshIntervalTime = 60 * 1000;
 var zelhashCloudPoolsV2 = zeroHash;
 var zelhashCoinBlockers = zeroHash;
 var zelhashEquiPool = zeroHash;
@@ -16,6 +16,7 @@ var zelhashpickaxe = zeroHash;
 var zelhashwfm = zeroHash;
 var zelhashXBTPool = zeroHash;
 var zelhashFastBlocksPool = zeroHash;
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -28,6 +29,7 @@ var bot = new Discord.Client({
     token: auth.token,
     autorun: true
 });
+
 bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
@@ -46,13 +48,13 @@ const zelurlwfm = "https://zpool.wfmpools.com/api/stats";
 const zelurlpickaxe = "https://equi.pickaxe.pro/api/stats";
 const zelurlforgetop = "https://zcl.forgetop.com/api/stats_all";
 
-
 // CHANNEL IDs - CLOUDPOOLS SPECIFIC
 const botlyfechan = '409793546577772575';
 const zelchan = '409206258764349446';
 
 // GET POOL HASHRATES
 function getPoolHash() {
+	
     request.get(zelurlCloudPoolsV2, (error, response, body) => {
         if (error) {
             zelhashCloudPoolsV2 = zeroHash
@@ -63,11 +65,9 @@ function getPoolHash() {
             } catch (e) {
                 zelhashCloudPoolsV2 = '0.00 KSol/s';
             }
-
-
         }
-
     });
+	
     request.get(zelurlCoinbBlockers, (error, response, body) => {
         if (error) {
             zelhashCoinBlockers = zeroHash
@@ -80,13 +80,10 @@ function getPoolHash() {
             } catch (e) {
                 zelhashCoinBlockers = '0.00 KSol/s';
             }
-
-
         }
-
     });
+	
     request.get(zelurlEquiPool, (error, response, body) => {
-
         if (error) {
             zelhashEquiPool = zeroHash
         } else {
@@ -98,12 +95,9 @@ function getPoolHash() {
             } catch (e) {
                 zelhashEquiPool = '0.00 KSol/s';
             }
-
-
         }
-
-
     });
+	
     request.get({
         "rejectUnauthorized": false,
         "url": zelurlFastBlocksPool
@@ -119,12 +113,9 @@ function getPoolHash() {
             } catch (e) {
                 zelhashFastBlocksPool = '0.00 KSol/s';
             }
-
-
         }
-
-
     });
+	
     request.get(zelurlXBTPool, (error, response, body) => {
         if (error) {
             zelhashXBTPool = zeroHash
@@ -137,12 +128,9 @@ function getPoolHash() {
             } catch (e) {
                 zelhashXBTPool = '0.00 KSol/s';
             }
-
-
         }
-
-
     });
+	
     request.get(zelurlNibiruPool, (error, response, body) => {
         if (error) {
             zelhashNibiruPool = zeroHash
@@ -155,12 +143,9 @@ function getPoolHash() {
             } catch (e) {
                 zelhashNibiruPool = '0.00 KSol/s';
             }
-
-
         }
-
-
     });
+	
     request.get(zelurlFlowPool, (error, response, body) => {
         if (error) {
             zelhashFlowPool = zeroHash
@@ -173,12 +158,9 @@ function getPoolHash() {
             } catch (e) {
                 zelhashFlowPool = '0.00 KSol/s';
             }
-
-
         }
-
-
     });
+	
     request.get(zelurlwfm, (error, response, body) => {
         if (error) {
             zelhashwfm = zeroHash
@@ -191,10 +173,7 @@ function getPoolHash() {
             } catch (e) {
                 zelhashwfm = '0.00 KSol/s';
             }
-
         }
-
-
     });
     request.get(zelurlpickaxe, (error, response, body) => {
         if (error) {
@@ -208,11 +187,9 @@ function getPoolHash() {
             } catch (e) {
                 zelhashpickaxe = '0.00 KSol/s';
             }
-
         }
-
-
     });
+	
     request.get(zelurlforgetop, (error, response, body) => {
         if (error) {
             zelhashforgetop = zeroHash
@@ -223,9 +200,7 @@ function getPoolHash() {
             } catch (e) {
                 zelhashforgetop = '0.00 KSol/s';
             }
-
         }
-
     });
 }
 
