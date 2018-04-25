@@ -16,6 +16,7 @@ var zelhashpickaxe = zeroHash;
 var zelhashwfm = zeroHash;
 var zelhashXBTPool = zeroHash;
 var zelhashFastBlocksPool = zeroHash;
+var zelhashAltHashers = zeroHash;
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -47,6 +48,7 @@ const zelurlFlowPool = "http://www.flowmining.org/api/stats";
 const zelurlwfm = "https://zpool.wfmpools.com/api/stats";
 const zelurlpickaxe = "https://equi.pickaxe.pro/api/stats";
 const zelurlforgetop = "https://zcl.forgetop.com/api/stats_all";
+const zelurlAltHashers = "https://althashers.com/api/stats";
 
 // CHANNEL IDs - CLOUDPOOLS SPECIFIC
 const botlyfechan = '409793546577772575';
@@ -202,8 +204,21 @@ function getPoolHash() {
             }
         }
     });
-}
-
+    
+    request.get(zelurlAltHashers, (error, response, body) => {
+        if (error) {
+            zelhashAltHashers = zeroHash
+        } else {
+            try {
+                let json = JSON.parse(body);
+                zelhashAltHashers = json.zelcash.networkSolsString;
+                zelAltHashersrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
+                zelAltHashersnetperhash = ((zelAltHashersrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
+            } catch (e) {
+                zelhashAlthashers = '0.00 KSol/s';
+            }
+        }
+    });
 setInterval(() => {
     getPoolHash();
     console.log(' __Please spread the hash. *No pool should have over 50% of total network hash.*__\r\n\r\n:pick:' +
@@ -216,6 +231,7 @@ setInterval(() => {
         ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
         ' `\r\n<https://zpool.wfmpools.com/> ` ' + zelhashwfm +
         ' `\r\n<http://pool.xbtmoon.com/> ` (EU) ` ` ' + zelhashXBTPool +
+        ' `\r\n<http://althashers.com/> ` (US) ` ` ' +zelhashAltHashers+        
         ' `\n\r\n*Data estimated and relative due to latency, etc.*'
     )
 }, refreshIntervalTime);
@@ -240,6 +256,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
                     ' `\r\n<https://zpool.wfmpools.com/> ` ' + zelhashwfm +
                     ' `\r\n<http://pool.xbtmoon.com/> ` (EU) ` ` ' + zelhashXBTPool +
+                    ' `\r\n<http://althashers.com/> ` (US) ` ` ' +zelhashAltHashers+
                     ' `\n\r\n*Data estimated and relative due to latency, etc.*'
                 });
                 break;
