@@ -17,6 +17,7 @@ var zelhashwfm = zeroHash;
 var zelhashXBTPool = zeroHash;
 var zelhashFastBlocksPool = zeroHash;
 var zelhashAltHashers = zeroHash;
+var zelhashLamboMoon = zeroHash;
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -49,6 +50,7 @@ const zelurlwfm = "https://zpool.wfmpools.com/api/stats";
 const zelurlpickaxe = "https://equi.pickaxe.pro/api/stats";
 const zelurlforgetop = "https://zcl.forgetop.com/api/stats_all";
 const zelurlAltHashers = "https://althashers.com/api/stats";
+const zelurlLamboMoon = "https://lambomoon.club/api/stats";
 
 // CHANNEL IDs - CLOUDPOOLS SPECIFIC
 const botlyfechan = '409793546577772575';
@@ -219,19 +221,35 @@ function getPoolHash() {
             }
         }
     });
+	request.get(zelurlLamboMoon, (error, response, body) => {
+        if (error) {
+            zelhashLamboMoon = zeroHash
+        } else {
+            try {
+                let json = JSON.parse(body);
+                zelhashLamboMoon = json.zelcash.networkSolsString;
+                zelLamboMoonrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
+                zelLamboMoonnetperhash = ((zelLamboMoonrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
+            } catch (e) {
+                zelhashAlthashers = '0.00 KSol/s';
+            }
+        }
+    });
+}
 setInterval(() => {
     getPoolHash();
     console.log(' __Please spread the hash. *No pool should have over 50% of total network hash.*__\r\n\r\n:pick:' +
         'Pools:\r\n<http://mine.CloudPools.net> ` (US) ` ` ' + zelhashCloudPoolsV2 +
         ' `\r\n<http://zel.CoinBlockers.com> ` (EU/US) ` ` ' + zelhashCoinBlockers +
         ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool +
-        ' `\r\n<http://www.flowmining.org/> ` (EU) ` ` ' + zelhashFlowPool +
-        ' `\r\n<https://zel.forgetop.com/> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+        ' `\r\n<http://www.flowmining.org> ` (EU) ` ` ' + zelhashFlowPool +
+        ' `\r\n<https://zel.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetop +
         ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool +
         ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
-        ' `\r\n<https://zpool.wfmpools.com/> ` ' + zelhashwfm +
-        ' `\r\n<http://pool.xbtmoon.com/> ` (EU) ` ` ' + zelhashXBTPool +
-        ' `\r\n<http://althashers.com/> ` (US) ` ` ' +zelhashAltHashers+        
+        ' `\r\n<https://zpool.wfmpools.com> ` ' + zelhashwfm +
+        ' `\r\n<http://pool.xbtmoon.com> ` (EU) ` ` ' + zelhashXBTPool +
+        ' `\r\n<http://althashers.com> ` (US) ` ` ' + zelhashAltHashers +
+		' `\r\n<https://lambomoon.club> ` (US) ` ` ' + zelhashLamboMoon +
         ' `\n\r\n*Data estimated and relative due to latency, etc.*'
     )
 }, refreshIntervalTime);
@@ -250,13 +268,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     'Pools:\r\n<http://mine.CloudPools.net> ` (US) ` ` ' + zelhashCloudPoolsV2 +
                     ' `\r\n<http://zel.CoinBlockers.com> ` (EU/US) ` ` ' + zelhashCoinBlockers +
                     ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool +
-                    ' `\r\n<http://www.flowmining.org/> ` (EU) ` ` ' + zelhashFlowPool +
-                    ' `\r\n<https://zel.ForgeTop.com/> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+                    ' `\r\n<http://www.flowmining.org> ` (EU) ` ` ' + zelhashFlowPool +
+                    ' `\r\n<https://zel.ForgeTop.com> ` (EU/ASIA) ` ` ' + zelhashforgetop +
                     ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool +
                     ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
-                    ' `\r\n<https://zpool.wfmpools.com/> ` ' + zelhashwfm +
-                    ' `\r\n<http://pool.xbtmoon.com/> ` (EU) ` ` ' + zelhashXBTPool +
-                    ' `\r\n<http://althashers.com/> ` (US) ` ` ' +zelhashAltHashers+
+                    ' `\r\n<https://zpool.wfmpools.com> ` ' + zelhashwfm +
+                    ' `\r\n<http://pool.xbtmoon.com> ` (EU) ` ` ' + zelhashXBTPool +
+                    ' `\r\n<http://althashers.com> ` (US) ` ` ' + zelhashAltHashers +
+					' `\r\n<https://lambomoon.club> ` (US) ` ` ' + zelhashLamboMoon +
                     ' `\n\r\n*Data estimated and relative due to latency, etc.*'
                 });
                 break;
