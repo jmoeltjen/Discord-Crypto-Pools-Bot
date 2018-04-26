@@ -67,7 +67,7 @@ function getPoolHash() {
                 let json = JSON.parse(body);
                 zelhashCloudPoolsV2 = (json.pool.poolStats.poolHashrate / 1000) + ' KSol/s';
             } catch (e) {
-                zelhashCloudPoolsV2 = '0.00 KSol/s';
+                zelhashCloudPoolsV2 = 'BORKED';
             }
         }
     });
@@ -79,10 +79,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashCoinBlockers = json.pools.zelcash.hashrateString;
-                zelCoinBlockersrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelCoinBlockersnetperhash = ((zelCoinBlockersrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashCoinBlockers = '0.00 KSol/s';
+                zelhashCoinBlockers = 'BORKED';
             }
         }
     });
@@ -94,10 +92,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashEquiPool = json.pools.zelcash.hashrateString;
-                zelEquiPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelEquiPoolnetperhash = ((zelEquiPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashEquiPool = '0.00 KSol/s';
+                zelhashEquiPool = 'BORKED';
             }
         }
     });
@@ -112,10 +108,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashFastBlocksPool = json.pools.zelcash.hashrateString;
-                zelFastBlocksPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelFastBlocksPoolnetperhash = ((zelFastBlocksPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashFastBlocksPool = '0.00 KSol/s';
+                zelhashFastBlocksPool = 'BORKED';
             }
         }
     });
@@ -127,10 +121,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashXBTPool = json.pools.zelcash.hashrateString;
-                zelXBTPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelXBTPoolnetperhash = ((zelXBTPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashXBTPool = '0.00 KSol/s';
+                zelhashXBTPool = 'BORKED';
             }
         }
     });
@@ -142,10 +134,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashNibiruPool = json.pools.zelcash.hashrateString;
-                zelNibiruPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelNibiruPoolnetperhash = ((zelNibiruPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashNibiruPool = '0.00 KSol/s';
+                zelhashNibiruPool = 'BORKED';
             }
         }
     });
@@ -157,10 +147,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashFlowPool = json.pools.zelcash.hashrateString;
-                zelFlowPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelFlowPoolnetperhash = ((zelFlowPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashFlowPool = '0.00 KSol/s';
+                zelhashFlowPool = 'BORKED';
             }
         }
     });
@@ -172,10 +160,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashwfm = json.pools.zelcash.hashrateString;
-                zelwfmrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelwfmnetperhash = ((zelwfmrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashwfm = '0.00 KSol/s';
+                zelhashwfm = 'BORKED';
             }
         }
     });
@@ -186,10 +172,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashpickaxe = json.pools.zelcash.hashrateString;
-                zelpickaxerealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelpickaxenetperhash = ((zelpickaxerealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashpickaxe = '0.00 KSol/s';
+                zelhashpickaxe = 'BORKED';
             }
         }
     });
@@ -213,9 +197,7 @@ function getPoolHash() {
         } else {
             try {
                 let json = JSON.parse(body);
-                zelhashAltHashers = json.zelcash.networkSolsString;
-                zelAltHashersrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelAltHashersnetperhash = ((zelAltHashersrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
+                zelhashAltHashers = json.pools.zelcash.hashrateString;
             } catch (e) {
                 zelhashAlthashers = '0.00 KSol/s';
             }
@@ -227,9 +209,7 @@ function getPoolHash() {
         } else {
             try {
                 let json = JSON.parse(body);
-                zelhashLamboMoon = json.zelcash.networkSolsString;
-                zelLamboMoonrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelLamboMoonnetperhash = ((zelLamboMoonrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
+                zelhashLamboMoon = json.pools.zelcash.hashrateString;
             } catch (e) {
                 zelhashAlthashers = '0.00 KSol/s';
             }
