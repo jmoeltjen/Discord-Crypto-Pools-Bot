@@ -48,7 +48,7 @@ const zelurlNibiruPool = "https://zel.nibirupool.com/api/stats";
 const zelurlFlowPool = "http://www.flowmining.org/api/stats";
 const zelurlwfm = "https://zpool.wfmpools.com/api/stats";
 const zelurlpickaxe = "https://equi.pickaxe.pro/api/stats";
-const zelurlforgetop = "https://zcl.forgetop.com/api/stats_all";
+const zelurlforgetop = "https://notifications.forgetop.com/api/stats_all";
 const zelurlAltHashers = "https://althashers.com/api/stats";
 const zelurlLamboMoon = "https://lambomoon.club/api/stats";
 
