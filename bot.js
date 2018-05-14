@@ -11,6 +11,7 @@ var zelhashCoinBlockers = zeroHash;
 var zelhashEquiPool = zeroHash;
 var zelhashFlowPool = zeroHash;
 var zelhashforgetop = zeroHash;
+var zelhashforgetopsolo = zeroHash;
 var zelhashNibiruPool = zeroHash;
 var zelhashpickaxe = zeroHash;
 var zelhashwfm = zeroHash;
@@ -180,6 +181,19 @@ function getPoolHash() {
 	
     request.get(zelurlforgetop, (error, response, body) => {
         if (error) {
+            zelhashforgetopsolo = zeroHash
+        } else {
+            try {
+                let json = JSON.parse(body);
+                zelhashforgetopsolo = json.zelsolo.networkSolsString;
+            } catch (e) {
+                zelhashforgetopsolo = '0.00 KSol/s';
+            }
+        }
+    });
+	
+    request.get(zelurlforgetop, (error, response, body) => {
+        if (error) {
             zelhashforgetop = zeroHash
         } else {
             try {
@@ -224,6 +238,7 @@ setInterval(() => {
         ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool +
         ' `\r\n<http://www.flowmining.org> ` (EU) ` ` ' + zelhashFlowPool +
         ' `\r\n<https://zel.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+	' `\r\n<https://zel-solo.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetopsolo +
         ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool +
         ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
         ' `\r\n<https://zpool.wfmpools.com> ` ' + zelhashwfm +
@@ -250,6 +265,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool +
                     ' `\r\n<http://www.flowmining.org> ` (EU) ` ` ' + zelhashFlowPool +
                     ' `\r\n<https://zel.ForgeTop.com> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+		    ' `\r\n<https://zel-solo.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetopsolo +
                     ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool +
                     ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
                     ' `\r\n<https://zpool.wfmpools.com> ` ' + zelhashwfm +
