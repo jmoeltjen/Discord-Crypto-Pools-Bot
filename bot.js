@@ -19,6 +19,7 @@ var zelhashXBTPool = zeroHash;
 var zelhashFastBlocksPool = zeroHash;
 var zelhashAltHashers = zeroHash;
 var zelhashLamboMoon = zeroHash;
+var zelhashRagnarPool = zeroHash;
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -52,6 +53,7 @@ const zelurlpickaxe = "https://equi.pickaxe.pro/api/stats";
 const zelurlforgetop = "https://notifications.forgetop.com/api/stats_all";
 const zelurlAltHashers = "https://althashers.com/api/stats";
 const zelurlLamboMoon = "https://lambomoon.club/api/stats";
+const zelurlRagnarpool = "https://zel.ragnarpool.ovh/api/stats";
 
 // CHANNEL IDs - CLOUDPOOLS SPECIFIC
 const botlyfechan = '409793546577772575';
@@ -245,6 +247,7 @@ setInterval(() => {
         ' `\r\n<http://pool.xbtmoon.com> ` (EU) ` ` ' + zelhashXBTPool +
         ' `\r\n<http://althashers.com> ` (US) ` ` ' + zelhashAltHashers +
 		' `\r\n<https://lambomoon.club> ` (US) ` ` ' + zelhashLamboMoon +
+		' `\r\n<https://zel.ragnarpool.ovh> ` (EU) ` ` ' + zelhashRagnarPool +
         ' `\n\r\n*Data estimated and relative due to latency, etc.*'
     )
 }, refreshIntervalTime);
@@ -272,6 +275,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     ' `\r\n<http://pool.xbtmoon.com> ` (EU) ` ` ' + zelhashXBTPool +
                     ' `\r\n<http://althashers.com> ` (US) ` ` ' + zelhashAltHashers +
 					' `\r\n<https://lambomoon.club> ` (US) ` ` ' + zelhashLamboMoon +
+			' `\r\n<https://zel.ragnarpool.ovh> ` (EU) ` ` ' + zelhashRagnarPool +
                     ' `\n\r\n*Data estimated and relative due to latency, etc.*'
                 });
                 break;
