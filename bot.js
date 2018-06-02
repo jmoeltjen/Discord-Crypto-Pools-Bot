@@ -11,11 +11,15 @@ var zelhashCoinBlockers = zeroHash;
 var zelhashEquiPool = zeroHash;
 var zelhashFlowPool = zeroHash;
 var zelhashforgetop = zeroHash;
+var zelhashforgetopsolo = zeroHash;
 var zelhashNibiruPool = zeroHash;
 var zelhashpickaxe = zeroHash;
 var zelhashwfm = zeroHash;
 var zelhashXBTPool = zeroHash;
 var zelhashFastBlocksPool = zeroHash;
+var zelhashAltHashers = zeroHash;
+var zelhashLamboMoon = zeroHash;
+var zelhashRagnarPool = zeroHash;
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -46,7 +50,10 @@ const zelurlNibiruPool = "https://zel.nibirupool.com/api/stats";
 const zelurlFlowPool = "http://www.flowmining.org/api/stats";
 const zelurlwfm = "https://zpool.wfmpools.com/api/stats";
 const zelurlpickaxe = "https://equi.pickaxe.pro/api/stats";
-const zelurlforgetop = "https://zcl.forgetop.com/api/stats_all";
+const zelurlforgetop = "https://notifications.forgetop.com/api/stats_all";
+const zelurlAltHashers = "https://althashers.com/api/stats";
+const zelurlLamboMoon = "https://lambomoon.club/api/stats";
+const zelurlRagnarpool = "https://zel.ragnarpool.ovh/api/stats";
 
 // CHANNEL IDs - CLOUDPOOLS SPECIFIC
 const botlyfechan = '409793546577772575';
@@ -63,7 +70,7 @@ function getPoolHash() {
                 let json = JSON.parse(body);
                 zelhashCloudPoolsV2 = (json.pool.poolStats.poolHashrate / 1000) + ' KSol/s';
             } catch (e) {
-                zelhashCloudPoolsV2 = '0.00 KSol/s';
+                zelhashCloudPoolsV2 = 'BORKED';
             }
         }
     });
@@ -75,10 +82,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashCoinBlockers = json.pools.zelcash.hashrateString;
-                zelCoinBlockersrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelCoinBlockersnetperhash = ((zelCoinBlockersrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashCoinBlockers = '0.00 KSol/s';
+                zelhashCoinBlockers = 'BORKED';
             }
         }
     });
@@ -90,10 +95,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashEquiPool = json.pools.zelcash.hashrateString;
-                zelEquiPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelEquiPoolnetperhash = ((zelEquiPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashEquiPool = '0.00 KSol/s';
+                zelhashEquiPool = 'BORKED';
             }
         }
     });
@@ -108,10 +111,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashFastBlocksPool = json.pools.zelcash.hashrateString;
-                zelFastBlocksPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelFastBlocksPoolnetperhash = ((zelFastBlocksPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashFastBlocksPool = '0.00 KSol/s';
+                zelhashFastBlocksPool = 'BORKED';
             }
         }
     });
@@ -123,10 +124,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashXBTPool = json.pools.zelcash.hashrateString;
-                zelXBTPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelXBTPoolnetperhash = ((zelXBTPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashXBTPool = '0.00 KSol/s';
+                zelhashXBTPool = 'BORKED';
             }
         }
     });
@@ -138,10 +137,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashNibiruPool = json.pools.zelcash.hashrateString;
-                zelNibiruPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelNibiruPoolnetperhash = ((zelNibiruPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashNibiruPool = '0.00 KSol/s';
+                zelhashNibiruPool = 'BORKED';
             }
         }
     });
@@ -153,10 +150,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashFlowPool = json.pools.zelcash.hashrateString;
-                zelFlowPoolrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelFlowPoolnetperhash = ((zelFlowPoolrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashFlowPool = '0.00 KSol/s';
+                zelhashFlowPool = 'BORKED';
             }
         }
     });
@@ -168,10 +163,8 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashwfm = json.pools.zelcash.hashrateString;
-                zelwfmrealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelwfmnetperhash = ((zelwfmrealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashwfm = '0.00 KSol/s';
+                zelhashwfm = 'BORKED';
             }
         }
     });
@@ -182,10 +175,21 @@ function getPoolHash() {
             try {
                 let json = JSON.parse(body);
                 zelhashpickaxe = json.pools.zelcash.hashrateString;
-                zelpickaxerealhash = ((json.pools.zelcash.hashrate * 2) / 1000) / 1000;
-                zelpickaxenetperhash = ((zelpickaxerealhash / json.pools.zelcash.poolStats.networkSols) * 100).toFixed(2);
             } catch (e) {
-                zelhashpickaxe = '0.00 KSol/s';
+                zelhashpickaxe = 'BORKED';
+            }
+        }
+    });
+	
+    request.get(zelurlforgetop, (error, response, body) => {
+        if (error) {
+            zelhashforgetopsolo = zeroHash
+        } else {
+            try {
+                let json = JSON.parse(body);
+                zelhashforgetopsolo = json.zelsolo.networkSolsString;
+            } catch (e) {
+                zelhashforgetopsolo = '0.00 KSol/s';
             }
         }
     });
@@ -202,20 +206,48 @@ function getPoolHash() {
             }
         }
     });
+    
+    request.get(zelurlAltHashers, (error, response, body) => {
+        if (error) {
+            zelhashAltHashers = zeroHash
+        } else {
+            try {
+                let json = JSON.parse(body);
+                zelhashAltHashers = json.pools.zelcash.hashrateString;
+            } catch (e) {
+                zelhashAlthashers = '0.00 KSol/s';
+            }
+        }
+    });
+	request.get(zelurlLamboMoon, (error, response, body) => {
+        if (error) {
+            zelhashLamboMoon = zeroHash
+        } else {
+            try {
+                let json = JSON.parse(body);
+                zelhashLamboMoon = json.pools.zelcash.hashrateString;
+            } catch (e) {
+                zelhashAlthashers = '0.00 KSol/s';
+            }
+        }
+    });
 }
-
 setInterval(() => {
     getPoolHash();
     console.log(' __Please spread the hash. *No pool should have over 50% of total network hash.*__\r\n\r\n:pick:' +
         'Pools:\r\n<http://mine.CloudPools.net> ` (US) ` ` ' + zelhashCloudPoolsV2 +
         ' `\r\n<http://zel.CoinBlockers.com> ` (EU/US) ` ` ' + zelhashCoinBlockers +
         ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool +
-        ' `\r\n<http://www.flowmining.org/> ` (EU) ` ` ' + zelhashFlowPool +
-        ' `\r\n<https://zel.forgetop.com/> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+        ' `\r\n<http://www.flowmining.org> ` (EU) ` ` ' + zelhashFlowPool +
+        ' `\r\n<https://zel.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+	' `\r\n<https://zel-solo.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetopsolo +
         ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool +
         ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
-        ' `\r\n<https://zpool.wfmpools.com/> ` ' + zelhashwfm +
-        ' `\r\n<http://pool.xbtmoon.com/> ` (EU) ` ` ' + zelhashXBTPool +
+        ' `\r\n<https://zpool.wfmpools.com> ` ' + zelhashwfm +
+        ' `\r\n<http://pool.xbtmoon.com> ` (EU) ` ` ' + zelhashXBTPool +
+        ' `\r\n<http://althashers.com> ` (US) ` ` ' + zelhashAltHashers +
+		' `\r\n<https://lambomoon.club> ` (US) ` ` ' + zelhashLamboMoon +
+		' `\r\n<https://zel.ragnarpool.ovh> ` (EU) ` ` ' + zelhashRagnarPool +
         ' `\n\r\n*Data estimated and relative due to latency, etc.*'
     )
 }, refreshIntervalTime);
@@ -234,12 +266,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     'Pools:\r\n<http://mine.CloudPools.net> ` (US) ` ` ' + zelhashCloudPoolsV2 +
                     ' `\r\n<http://zel.CoinBlockers.com> ` (EU/US) ` ` ' + zelhashCoinBlockers +
                     ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool +
-                    ' `\r\n<http://www.flowmining.org/> ` (EU) ` ` ' + zelhashFlowPool +
-                    ' `\r\n<https://zel.ForgeTop.com/> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+                    ' `\r\n<http://www.flowmining.org> ` (EU) ` ` ' + zelhashFlowPool +
+                    ' `\r\n<https://zel.ForgeTop.com> ` (EU/ASIA) ` ` ' + zelhashforgetop +
+		    ' `\r\n<https://zel-solo.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetopsolo +
                     ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool +
                     ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
-                    ' `\r\n<https://zpool.wfmpools.com/> ` ' + zelhashwfm +
-                    ' `\r\n<http://pool.xbtmoon.com/> ` (EU) ` ` ' + zelhashXBTPool +
+                    ' `\r\n<https://zpool.wfmpools.com> ` ' + zelhashwfm +
+                    ' `\r\n<http://pool.xbtmoon.com> ` (EU) ` ` ' + zelhashXBTPool +
+                    ' `\r\n<http://althashers.com> ` (US) ` ` ' + zelhashAltHashers +
+					' `\r\n<https://lambomoon.club> ` (US) ` ` ' + zelhashLamboMoon +
+			' `\r\n<https://zel.ragnarpool.ovh> ` (EU) ` ` ' + zelhashRagnarPool +
                     ' `\n\r\n*Data estimated and relative due to latency, etc.*'
                 });
                 break;
