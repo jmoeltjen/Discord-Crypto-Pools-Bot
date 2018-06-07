@@ -20,6 +20,7 @@ var zelhashFastBlocksPool = zeroHash;
 var zelhashAltHashers = zeroHash;
 var zelhashLamboMoon = zeroHash;
 var zelhashRagnarPool = zeroHash;
+var zelhashVoid = zeroHash;
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -54,6 +55,7 @@ const zelurlforgetop = "https://notifications.forgetop.com/api/stats_all";
 const zelurlAltHashers = "https://althashers.com/api/stats";
 const zelurlLamboMoon = "https://lambomoon.club/api/stats";
 const zelurlRagnarpool = "https://zel.ragnarpool.ovh/api/stats";
+const zelurlVoid = "https://zelcash.voidr.net/api/stats";
 
 // CHANNEL IDs - CLOUDPOOLS SPECIFIC
 const botlyfechan = '409793546577772575';
@@ -189,7 +191,7 @@ function getPoolHash() {
                 let json = JSON.parse(body);
                 zelhashforgetopsolo = json.zelsolo.networkSolsString;
             } catch (e) {
-                zelhashforgetopsolo = '0.00 KSol/s';
+                zelhashforgetopsolo = 'BORKED';
             }
         }
     });
@@ -202,7 +204,7 @@ function getPoolHash() {
                 let json = JSON.parse(body);
                 zelhashforgetop = json.zelcash.networkSolsString;
             } catch (e) {
-                zelhashforgetop = '0.00 KSol/s';
+                zelhashforgetop = 'BORKED';
             }
         }
     });
@@ -215,7 +217,7 @@ function getPoolHash() {
                 let json = JSON.parse(body);
                 zelhashAltHashers = json.pools.zelcash.hashrateString;
             } catch (e) {
-                zelhashAlthashers = '0.00 KSol/s';
+                zelhashAlthashers = 'BORKED';
             }
         }
     });
@@ -227,7 +229,19 @@ function getPoolHash() {
                 let json = JSON.parse(body);
                 zelhashLamboMoon = json.pools.zelcash.hashrateString;
             } catch (e) {
-                zelhashAlthashers = '0.00 KSol/s';
+                zelhashAlthashers = 'BORKED';
+            }
+        }
+    });
+	request.get(zelurlVoid, (error, response, body) => {
+        if (error) {
+            zelhashVoid = zeroHash
+        } else {
+            try {
+                let json = JSON.parse(body);
+                zelhashVoid = json.pools.zelcash.hashrateString;
+            } catch (e) {
+                zelhashVoid = 'BORKED';
             }
         }
     });
@@ -248,6 +262,7 @@ setInterval(() => {
         ' `\r\n<http://althashers.com> ` (US) ` ` ' + zelhashAltHashers +
 		' `\r\n<https://lambomoon.club> ` (US) ` ` ' + zelhashLamboMoon +
 		' `\r\n<https://zel.ragnarpool.ovh> ` (EU) ` ` ' + zelhashRagnarPool +
+		' `\r\n<https://zelcash.voidr.net> ` (US/EU) ` ` ' + zelhashVoid +
         ' `\n\r\n*Data estimated and relative due to latency, etc.*'
     )
 }, refreshIntervalTime);
@@ -268,14 +283,15 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     ' `\r\n<http://equipool.1ds.us> ` (US/EU/ASIA) ` ` ' + zelhashEquiPool +
                     ' `\r\n<http://www.flowmining.org> ` (EU) ` ` ' + zelhashFlowPool +
                     ' `\r\n<https://zel.ForgeTop.com> ` (EU/ASIA) ` ` ' + zelhashforgetop +
-		    ' `\r\n<https://zel-solo.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetopsolo +
+					' `\r\n<https://zel-solo.forgetop.com> ` (EU/ASIA) ` ` ' + zelhashforgetopsolo +
                     ' `\r\n<https://zel.nibirupool.com> ` (EU) ` ` ' + zelhashNibiruPool +
                     ' `\r\n<https://equi.pickaxe.pro> ` (US) ` ` ' + zelhashpickaxe +
                     ' `\r\n<https://zpool.wfmpools.com> ` ' + zelhashwfm +
                     ' `\r\n<http://pool.xbtmoon.com> ` (EU) ` ` ' + zelhashXBTPool +
                     ' `\r\n<http://althashers.com> ` (US) ` ` ' + zelhashAltHashers +
 					' `\r\n<https://lambomoon.club> ` (US) ` ` ' + zelhashLamboMoon +
-			' `\r\n<https://zel.ragnarpool.ovh> ` (EU) ` ` ' + zelhashRagnarPool +
+					' `\r\n<https://zel.ragnarpool.ovh> ` (EU) ` ` ' + zelhashRagnarPool +
+					' `\r\n<https://zelcash.voidr.net> ` (US/EU) ` ` ' + zelhashVoid +
                     ' `\n\r\n*Data estimated and relative due to latency, etc.*'
                 });
                 break;
